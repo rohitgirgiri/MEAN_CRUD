@@ -8,9 +8,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 
 
-#backend server
+## backend server
+(express-nodejs-mongoDB)
 
 cd server <br>
 npm install <br>
 npm run dev for development server<br>
-or npm run
+or npm start
