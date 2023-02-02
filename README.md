@@ -3,6 +3,9 @@ navigate to cd frontend<br>
 npm install <br>
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
+setup environment in frontend <br>
+or .env in server in case or port or cors errors
+
 # Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
