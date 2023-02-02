@@ -9,7 +9,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 
 ## backend server
-(express-nodejs-mongoDB)
+(express-nodejs-mongoD) (nodejs version 18.13.0)
 
 cd server <br>
 npm install <br>
