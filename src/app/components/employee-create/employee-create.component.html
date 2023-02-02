@@ -1,0 +1,184 @@
+<div class="row justify-content-center">
+  <div class="col-md-4 register-employee">
+    <!-- form card register -->
+    <div class="card-body">
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <input class="form-control" type="text" formControlName="name" />
+          <!-- error -->
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && myForm['name'].errors?.['required']"
+          >
+            Name is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3">Email</label>
+          <input class="form-control" type="text" formControlName="email" />
+          <!-- error -->
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && myForm['email'].errors?.['required']"
+          >
+            Enter your email.
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && myForm['email'].errors?.['pattern']"
+          >
+            Enter valid email.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword3">Hobby</label>
+          <select
+            class="custom-select form-control"
+            (change)="updateProfile($event.target.value)"
+            formControlName="hobbies"
+          >
+            <option value="">Choose...</option>
+            <option
+              *ngFor="let employeeProfile of EmployeeProfile"
+              value="{{ employeeProfile }}"
+            >
+              {{ employeeProfile }}
+            </option>
+          </select>
+          <!-- error -->
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && myForm['hobbies'].errors?.['required']"
+          >
+            Choose hobbies.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputVerify3">password</label>
+          <input
+            class="form-control"
+            type="password"
+            formControlName="password"
+            placeholder="Only Numbers"
+          />
+          <!-- error -->
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && myForm['password'].errors?.['required']"
+          >
+            Enter password.
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && myForm['password'].errors?.['pattern']"
+          >
+            Enter Numbers Only
+          </div>
+        </div>
+
+        <!-- datepicker -->
+        <div class="form-group">
+          <label for="inputVerify3">Date</label>
+          <input
+            class="form-control"
+            type="date"
+            formControlName="datepicker"
+          />
+          <!-- error -->
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && myForm['datepicker'].errors?.['required']"
+          >
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && myForm['datepicker'].errors?.['pattern']"
+          >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputVerify3">Gender</label><br>
+          <label>
+            <input  type="radio" value="Male" formControlName="gender">
+              <span class="mx-2">male</span>
+          </label>
+          <label>
+            <input class="mx-2" type="radio" value="Female" formControlName="gender">
+              <span>female</span>
+          </label>
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && myForm['gender'].errors?.['pattern']"
+          >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputVerify3">Status</label><br>
+          <label>
+            <input  type="checkbox" value="Active" formControlName="status">
+              <span class="mx-2">Active</span>
+          </label>
+          <div
+            class="invalid-feedback"
+            
+          >
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-secondary btn-lg btn-block my-2 mx-2 float-end" type="submit">
+            Save
+          </button>
+          <button class="btn btn-secondary btn-lg btn-block my-2 float-end" (click)=ClearForm()>
+            Clear
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- form card register -->
+</div>
+<div class="container">
+  <!-- No data message -->
+  <p *ngIf="Employee.length <= 0" class="no-data text-center">
+    There is no employee added yet!
+  </p>
+
+  <!-- Employee list -->
+  <h1>Data</h1>
+  <table class="table" *ngIf="Employee.length > 0">
+    <thead class="table-secondary">
+      <tr>
+        <th scope="col center">Actions</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">gender</th>
+        <th scope="col">Dob</th>
+        <th scope="col">Hobby</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of Employee; let i = index">
+        <td class=" edit-block">
+          <span class="edit" [routerLink]="['/edit-employee/', employee._id]">
+            <mat-icon>edit</mat-icon>
+          </span>
+          <span class="delete mx-2" (click)="removeEmployee(employee, i)">
+            <mat-icon>delete_forever</mat-icon>
+          </span>
+        </td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <th scope="row">{{ employee.gender}}</th>
+        <td>{{ employee.datepicker }}</td>
+        <td>{{ employee.hobbies }}</td>
+        <td>{{ employee.status}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>

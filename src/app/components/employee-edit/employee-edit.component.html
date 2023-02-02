@@ -1,0 +1,144 @@
+<div class="row justify-content-center">
+  <div class="col-md-4 register-employee">
+    <!-- form card register -->
+    <div class="card card-outline-secondary">
+      <div class="card-header">
+        <h3 class="mb-0">Edit Employee</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="inputName">Name</label>
+            <input class="form-control" type="text" formControlName="name" />
+            <div
+              class="invalid-feedback"
+              *ngIf="submitted && myForm['name'].errors?.['required']"
+            >
+              Name is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3">Email</label>
+            <input class="form-control" type="text" formControlName="email" />
+            <!-- error -->
+            <div
+              class="invalid-feedback"
+              *ngIf="submitted && myForm['email'].errors?.['required']"
+            >
+              Enter your email.
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="submitted && myForm['email'].errors?.['pattern']"
+            >
+              Enter valid email.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputVerify3">password</label>
+            <input
+              class="form-control"
+              type="password"
+              formControlName="password"
+              placeholder="Only Numbers"
+            />
+            <!-- error -->
+            <div
+              class="invalid-feedback"
+              *ngIf="submitted && myForm['password'].errors?.['required']"
+            >
+              Enter password.
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="submitted && myForm['password'].errors?.['pattern']"
+            >
+              Enter Numbers Only
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3">Hobby</label>
+            <select
+              class="custom-select form-control"
+              (change)="updateProfile($event.target.value)"
+              formControlName="hobbies"
+            >
+              <option value="">Choose...</option>
+              <option
+                *ngFor="let employeeProfile of EmployeeProfile"
+                value="{{ employeeProfile }}"
+              >
+                {{ employeeProfile }}
+              </option>
+            </select>
+            <!-- error -->
+            <div
+              class="invalid-feedback"
+              *ngIf="submitted && myForm['hobbies'].errors?.['required']"
+            >
+              Choose hobbies.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputVerify3">Date</label>
+            <input
+              class="form-control"
+              type="date"
+              formControlName="datepicker"
+            />
+            <!-- error -->
+            <div
+              class="invalid-feedback"
+              *ngIf="submitted && myForm['datepicker'].errors?.['required']"
+            ></div>
+            <div
+              class="invalid-feedback"
+              *ngIf="submitted && myForm['datepicker'].errors?.['pattern']"
+            ></div>
+          </div>
+          <div class="form-group">
+            <label for="inputVerify3">Gender</label><br />
+            <label>
+              <input type="radio" value="Male" formControlName="gender" />
+              <span class="mx-2">male</span>
+            </label>
+            <label>
+              <input
+                class="mx-2"
+                type="radio"
+                value="Female"
+                formControlName="gender"
+              />
+              <span>female</span>
+            </label>
+            <div
+              class="invalid-feedback"
+              *ngIf="submitted && myForm['gender'].errors?.['pattern']"
+            ></div>
+          </div>
+          <div class="form-group">
+            <label for="inputVerify3">Status</label><br />
+            <label>
+              <input type="checkbox" value="Active" formControlName="status" />
+              <span class="mx-2">Active</span>
+            </label>
+            <div class="invalid-feedback"></div>
+          </div>
+
+          <div class="form-group my-2">
+            <button
+              class="btn btn-secondary btn-lg btn-block"
+              (click)="cancelEdit()"
+            >
+              Cancel
+            </button>
+            <button class="btn btn-secondary btn-lg btn-block mx-2" type="submit">
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- form  -->
+  </div>
+</div>
